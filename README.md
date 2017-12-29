@@ -228,7 +228,7 @@ and replace it with the following:
 `engine = create_engine('postgresql://catalog:DB-PASSWORD@localhost/catalog')`
 
 ## Update the Google OAuth client secrets file
-Find any reference to client_secret.json and replace it with its full path name. Also change the javascript_origins field to the IP address and AWS assigned URL of the host: `"javascript_origins":["http://35.157.67.119", "http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com"]
+Find any reference to client_secret.json and replace it with its full path name. Also change the javascript_origins field to the IP address and AWS assigned URL of the host: `"javascript_origins":["http://35.157.67.119", "http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com"]`
 
 Enter these addresses also into the Google Developers Console -> API Manager -> Credentials, in the web client under "Authorized JavaScript origins".
 ## Update the Facebook OAuth client secrets file
