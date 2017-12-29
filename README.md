@@ -77,6 +77,23 @@ command to reboot the machine:
 
 `reboot`
 
+## Install unattended-upgrades to automate the update of the packages
+[Ubuntu documentation on Automatic updates](https://help.ubuntu.com/lts/serverguide/automatic-updates.html)
+
+Install the unattended-upgrades package:
+`sudo apt install unattended-upgrades`
+
+Check the congiguration file `/etc/apt/apt.conf.d/50unattended-upgrades` to adjust it to fit your needs. It was left at the default of security updates only.
+
+To enable automatic updates, edit `/etc/apt/apt.conf.d/20auto-upgrades` and set the appropriate apt configuration options:
+```
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Download-Upgradeable-Packages "1";
+APT::Periodic::AutocleanInterval "7";
+APT::Periodic::Unattended-Upgrade "1";
+```
+The above configuration updates the package list, downloads, and installs available upgrades every day. The local download archive is cleaned every week.
+
 ## Add user grader
 Add user `grader` with command: `useradd -m -s grader`
 
