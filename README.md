@@ -194,7 +194,7 @@ add line `RedirectMatch 404 /\.git`
 
 # Modify your app structure to be ready for the deployment
 [Digital Ocean tutorial on how to deploy a Flask app on an Ubuntu VPS ](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
-[Patterns for flask - Larger applications] (http://flask.pocoo.org/docs/0.12/patterns/packages/)
+[Patterns for flask - Larger applications](http://flask.pocoo.org/docs/0.12/patterns/packages/)
 [Installing mod_wsgi on Apache server](http://flask.pocoo.org/docs/0.12/deploying/mod_wsgi/)
 
 ## Create a folder catalog inside the folder catalog
@@ -272,4 +272,4 @@ These are the contents:
 #### Restart Apache 
 `sudo service apache2 restart`
 
-Your app is now on-line!
+## Your app is now on-line!
