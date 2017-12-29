@@ -275,3 +275,8 @@ These are the contents:
 `sudo service apache2 restart`
 
 ## Your app is now on-line!
+
+## Inspirational work from other students 
+[Steve Wooding](https://github.com/SteveWooding/fullstack-nanodegree-linux-server-config)
+[Seal Holcomb](https://github.com/Sean-Holcomb/Linux-Server-Configuration)
+Udacity FSND Forum discussions were of great help!
