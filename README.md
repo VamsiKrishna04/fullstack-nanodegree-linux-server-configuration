@@ -103,7 +103,7 @@ chmod 644 /home/grader/.ssh/authorized_keys
 ```
 
 Can now login as the `grader` user using the command:
-`ssh -i ~/.ssh/YOUR_KEYFILE_NAME grader@35.157.67.119 -p 2200`
+`ssh -i ~/.ssh/graderUdacity grader@35.157.67.119 -p 2200`
 
 ## Disable root login
 Change the following line in the file `/etc/ssh/sshd_config`:
