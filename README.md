@@ -2,11 +2,11 @@
 Linux Server Configuration - Udacity Full Stack Web Developer ND
 
 # Server details
-IP address: ~~`35.157.67.119`~~
+IP address: `35.157.67.119`
 
 SSH port: `2200`
 
-URL: ~~`http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com`~~
+URL: `http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com`
 
 # Configuration changes
 ## Configuration of Uncomplicated Firewall (UFW)
@@ -53,9 +53,9 @@ Edit the file `/etc/ssh/sshd_config` and change the line `Port 22` to:
 `Port 2200`
 
 ## Blocking the connection to port 22
+[Getting Started with UFW](https://www.howtoforge.com/tutorial/ufw-uncomplicated-firewall-on-ubuntu-15-04/)
 
 `ufw deny 22`
-[Getting Started with UFW](https://www.howtoforge.com/tutorial/ufw-uncomplicated-firewall-on-ubuntu-15-04/)
 
 To check that the rules have changed:
 
@@ -103,7 +103,7 @@ chmod 644 /home/grader/.ssh/authorized_keys
 ```
 
 Can now login as the `grader` user using the command:
-`ssh -i ~/.ssh/udacity_key.rsa grader@35.157.67.119 -p 2200`
+`ssh -i ~/.ssh/YOUR_KEYFILE_NAME grader@35.157.67.119 -p 2200`
 
 ## Disable root login
 Change the following line in the file `/etc/ssh/sshd_config`:
@@ -192,31 +192,33 @@ add line `RedirectMatch 404 /\.git`
 
 [Hide Git Repos on Public Sites](https://davidegan.me/hide-git-repos-on-public-sites/)
 
-## Modify your app structure to be ready for the deployment
+# Modify your app structure to be ready for the deployment
 [Digital Ocean tutorial on how to deploy a Flask app on an Ubuntu VPS ](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
-[Patterns for flask - Larger applications] http://flask.pocoo.org/docs/0.12/patterns/packages/
+[Patterns for flask - Larger applications] (http://flask.pocoo.org/docs/0.12/patterns/packages/)
 [Installing mod_wsgi on Apache server](http://flask.pocoo.org/docs/0.12/deploying/mod_wsgi/)
 
-Create a folder catalog inside the folder catalog and move all your files in there. 
-Rename your application.py file to __init__.py.
+## Create a folder catalog inside the folder catalog
+Move all your files in there. 
+## Rename your application.py file to __init__.py.
 `$ sudo mv application.py __init__.py`
 
-#### Edit engine in __init__.py, database_create.py and lotsofgenres.py
-Use `sudo nano` on each of the files and fund the line
+## Edit engine in __init__.py, database_create.py and lotsofgenres.py
+Use `sudo nano` on each of the files. Find the line
 `engine = create_engine('sqlite:///filmgenrecatalog.db')`
 and replace it with the following:
 `engine = create_engine('postgresql://catalog:DB-PASSWORD@localhost/catalog')`
 
-#### Update the Google OAuth client secrets file
+## Update the Google OAuth client secrets file
 Find any reference to client_secret.json and replace it with its full path name. Also change the javascript_origins field to the IP address and AWS assigned URL of the host: "javascript_origins":["http://35.157.67.119", "http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com"]
 
 Enter these addresses also into the Google Developers Console -> API Manager -> Credentials, in the web client under "Authorized JavaScript origins".
-
-####Update the Facebook OAuth client secrets file
+## Update the Facebook OAuth client secrets file
 Find any reference to fb_client_secret.json and replace it with its full path name. Also change the website URL in the Facebook developers website, on the Settings page, the Site URL needs to read http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com. Then in the Products, Facebook Login, "Settings" tab, in the "Valid OAuth Redirect URIs", add http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com and http://35.157.67.119. Save these changes.
 #### Create your database
-`python database_create.py`
-`python lotsofgenres.py`
+```
+python database_create.py
+python lotsofgenres.py
+```
 ## Create and update catalog.wsgi file for the installation
 Create catalog.wsgi file in the outmost catalog folder and type in the following
 ```
@@ -258,14 +260,16 @@ These are the contents:
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
-Disable the default vistual host.
+#### Disable the default virtual host.
 `sudo a2dissite 000-default.conf`
-Enable the virtual host just created.
+#### Enable the virtual host just created.
 `sudo a2ensite catalog.conf`
-To make these changes live restart Apache2 by
+#### To make these changes live restart Apache2 by
 `sudo service apache2 restart`
 
-Run your init.py.
+## Run your init.py.
 `python __init__.py`
+#### Restart Apache 
+`sudo service apache2 restart`
 
-Go to your Google Console and Facebook add your HOSTNAME to your project's Authorized Javascript Origins and Authorized Redirect URIs.
+Your app is now on-line!
