@@ -232,7 +232,7 @@ Find any reference to client_secret.json and replace it with its full path name.
 
 Enter these addresses also into the Google Developers Console -> API Manager -> Credentials, in the web client under "Authorized JavaScript origins".
 ## Update the Facebook OAuth client secrets file
-Find any reference to fb_client_secret.json and replace it with its full path name. Also change the website URL in the Facebook developers website, on the Settings page, the Site URL needs to read `http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com`. Then in the Products, Facebook Login, "Settings" tab, in the "Valid OAuth Redirect URIs", add `http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com` and `http://35.157.67.119. Save these changes.
+Find any reference to fb_client_secret.json and replace it with its full path name. Also change the website URL in the Facebook developers website, on the Settings page, the Site URL needs to read `http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com`. Then in the Products, Facebook Login, "Settings" tab, in the "Valid OAuth Redirect URIs", add `http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com` and `http://35.157.67.119`. Save these changes.
 #### Create your database
 ```
 python database_create.py
