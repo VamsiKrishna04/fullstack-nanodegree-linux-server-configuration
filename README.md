@@ -8,6 +8,8 @@ SSH port: `2200`
 
 URL: `http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com`
 
+Note: I have graduated and the original server has been disabled. You may follow these instructions when setting up a new server.
+
 # Configuration changes
 ## Configuration of Uncomplicated Firewall (UFW)
 I decided to start the project by the ufw configuration. Hence, if I got blocked out from the server, it would happen in the very beginning.
@@ -279,22 +281,81 @@ These are the contents:
 	CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
-#### Disable the default virtual host.
+#### Disable the default virtual host
 `sudo a2dissite 000-default.conf`
-#### Enable the virtual host just created.
+#### Enable the virtual host just created
 `sudo a2ensite catalog.conf`
 #### To make these changes live restart Apache2 by
 `sudo service apache2 restart`
 
-## Run your init.py.
+## Run your init.py
 `python __init__.py`
 #### Restart Apache 
 `sudo service apache2 restart`
 
-## Your app is now on-line!
+## Your app is now online!
+
+# Extra configuration - Use Fail to Ban to Secure Your Server from Failed Login Attemps
+[Linode Tutorial on How to Secure Your Server with Fail2Ban ](https://linode.com/docs/security/using-fail2ban-for-security/)
+
+[Rapid7 Blog on How To Protect SSH and Apache Using Fail2Ban on Ubuntu Linux](https://blog.rapid7.com/2017/02/13/how-to-protect-ssh-and-apache-using-fail2ban-on-ubuntu-linux/)
+
+Note: Fail2ban will not secure your server from D
+## Install Fail2Ban
+`sudo apt-get install fail2ban`
+
+## Install Sendmail if you would like email support
+`sudo apt-get install sendmail`
+
+## Configure fail2ban.local
+Create a new `jail.local` file for Apache2 and SSH:
+`cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local`
+
+Edit this file.
+`sudo nano /etc/fail2ban/jail.local`
+
+Set the following settings:
+```
+bantime = 1800
+destemail = [my email address]
+action = %(action_mwl)s
+```
+We are now banning an IP address for 1800 seconds and send an email to the address specified `destemail`. An email notification will be sent with logging extract included `action`.
+
+Add the `ssh` section where you'll specify your non-custom ssh port:
+```
+[ssh]
+
+enabled  = true
+banaction = ufw-ssh
+port     = 2200
+filter   = sshd
+logpath  = /var/log/auth.log
+maxretry = 3
+```
+
+The `banaction` is set to run a custom action ufw-ssh. It uses the UFW frontend to the iptables firewall. Blocked IP address will appear in the output of sudo ufw status. The port is set to our customised SSH port. 
+
+These are the contents of the `/etc/fail2ban/action.d/ufw-ssh.conf`:
+```
+[Definition]
+actionstart =
+actionstop =
+actioncheck =
+actionban = ufw insert 1 deny from <ip> to any port 2200
+actionunban = ufw delete deny from <ip> to any port 2200
+```
+New settings will take effect when you stop ans starts the fail2ban service.
+```
+sudo service fail2ban stop
+sudo service fail2ban start
+```
+This configuration will not protect your server from the aytempted DDoS Attacks. 
+[SecurutyIntelligence on How to Defend Against Apache Web Server DDoS Attacks
+](https://securityintelligence.com/defending-against-apache-web-server-ddos-attacks/)
 
 ## Inspirational work from other students 
-[Steve Wooding](https://github.com/SteveWooding/fullstack-nanodegree-linux-server-config)
+[Steven Wooding](https://github.com/SteveWooding/fullstack-nanodegree-linux-server-config)
 
 [Sean Holcomb](https://github.com/Sean-Holcomb/Linux-Server-Configuration)
 
