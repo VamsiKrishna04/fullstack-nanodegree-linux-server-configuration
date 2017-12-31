@@ -254,7 +254,7 @@ from catalog import app as application
 application.secret_key = 'YOUR_SECRET_KEY'
 ```
 
-## Configure and Enable Aapache2 to serve your app
+## Configure and Enable Apache2 to serve your app
 To serve the catalog app using the Apache2 web server, you need to create a virtual host configuration file. 
 
 `sudo nano /etc/apache2/sites-available/catalog.conf`
@@ -285,7 +285,7 @@ These are the contents:
 `sudo a2dissite 000-default.conf`
 #### Enable the virtual host just created
 `sudo a2ensite catalog.conf`
-#### To make these changes live restart Apache2 by
+#### To make these changes live restart Apache2
 `sudo service apache2 restart`
 
 ## Run your init.py
@@ -295,12 +295,11 @@ These are the contents:
 
 ## Your app is now online!
 
-# Extra configuration - Use Fail to Ban to Secure Your Server from Failed Login Attemps
+# Extra configuration - Use Fail to Ban to Secure Your Server from Failed Login Attempts
 [Linode Tutorial on How to Secure Your Server with Fail2Ban ](https://linode.com/docs/security/using-fail2ban-for-security/)
 
 [Rapid7 Blog on How To Protect SSH and Apache Using Fail2Ban on Ubuntu Linux](https://blog.rapid7.com/2017/02/13/how-to-protect-ssh-and-apache-using-fail2ban-on-ubuntu-linux/)
 
-Note: Fail2ban will not secure your server from D
 ## Install Fail2Ban
 `sudo apt-get install fail2ban`
 
@@ -350,8 +349,9 @@ New settings will take effect when you stop ans starts the fail2ban service.
 sudo service fail2ban stop
 sudo service fail2ban start
 ```
-This configuration will not protect your server from the aytempted DDoS Attacks. 
-[SecurutyIntelligence on How to Defend Against Apache Web Server DDoS Attacks
+This configuration will not protect your server from the DDoS Attacks. 
+
+[SecurityIntelligence on How to Defend Against Apache Web Server DDoS Attacks
 ](https://securityintelligence.com/defending-against-apache-web-server-ddos-attacks/)
 
 ## Inspirational work from other students 
