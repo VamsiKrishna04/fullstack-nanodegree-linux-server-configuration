@@ -8,7 +8,7 @@ SSH port: `2200`
 
 URL: `http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com`
 
-Note: I have graduated and the original server has been disabled. You may follow these instructions when setting up a new server.
+Note: I have graduated and the original server will be disabled. You may follow these instructions when setting up a new server.
 
 # Configuration changes
 ## Configuration of Uncomplicated Firewall (UFW)
@@ -220,7 +220,7 @@ add line `RedirectMatch 404 /\.git`
 
 ## Create a folder catalog inside the folder catalog
 Move all your files in there. 
-## Rename your application.py file to __init__.py.
+## Rename your application.py file to __init__.py
 `$ sudo mv application.py __init__.py`
 
 ## Edit engine in __init__.py, database_create.py and lotsofgenres.py
@@ -235,13 +235,13 @@ Find any reference to client_secret.json and replace it with its full path name.
 Enter these addresses also into the Google Developers Console -> API Manager -> Credentials, in the web client under "Authorized JavaScript origins".
 ## Update the Facebook OAuth client secrets file
 Find any reference to fb_client_secret.json and replace it with its full path name. Also change the website URL in the Facebook developers website, on the Settings page, the Site URL needs to read `http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com`. Then in the Products, Facebook Login, "Settings" tab, in the "Valid OAuth Redirect URIs", add `http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com` and `http://35.157.67.119`. Save these changes.
-#### Create your database
+## Create your database
 ```
 python database_create.py
 python lotsofgenres.py
 ```
 ## Create and update catalog.wsgi file for the installation
-Create catalog.wsgi file in the outmost catalog folder and type in the following
+Create catalog.wsgi file in the outmost catalog folder and type in the following:
 ```
 #!/usr/bin/python
 import sys
