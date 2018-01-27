@@ -2,13 +2,13 @@
 Linux Server Configuration - Udacity Full Stack Web Developer ND
 
 # Server details
-IP address: `35.157.67.119`
+IP address: ~~`35.157.67.119`~~
 
 SSH port: `2200`
 
-URL: `http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com`
+URL: ~~`http://ec2-35-157-67-119.eu-central-1.compute.amazonaws.com`~~
 
-Note: I have graduated and the original server will be disabled. You may follow these instructions when setting up a new server.
+Note: I have graduated and the original server has been disabled. You may follow these instructions when setting up a new server.
 
 # Configuration changes
 ## Configuration of Uncomplicated Firewall (UFW)
